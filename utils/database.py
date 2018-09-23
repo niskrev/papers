@@ -3,24 +3,37 @@ Concerned with storing and retrieving papers from a list.
 
     Created by Nikolay on 9/23/18
 """
+import sqlite3
 
-papers = []
+def create_paper_table():
+    conn = sqlite3.connect('data.db')
+    cur = conn.cursor()
+
+    cur.execute('CREATE TABLE IF NOT EXISTS papers(name text primary key, author text, read integer)')
+
+    conn.commit()
+    conn.close()
 
 
 def add_paper(name, author):
-    papers.append({'name': name, 'author': author, 'read': False})
+    conn = sqlite3.connect('data.db')
+    cur = conn.cursor()
+
+    cur.execute('INSERT INTO papers VALUES(?, ?, 0)', (name, author))
+
+    conn.commit()
+    conn.close()
 
 
-def list_papers():
-    for paper in papers:
-        print('{name}, {author}, {read}'.format(name=paper['name'],
-                                                author=paper['author'],
-                                                read=paper['read']))
+def get_all_papers():
+    return papers
 
-def read_paper(name):
+
+def mark_paper_as_read(name):
     for paper in papers:
         if paper['name'] == name:
             paper['read'] = True
 
 def delete_paper(name):
+    global papers
     papers = [paper for paper in papers if paper['name']!=name]
