@@ -43,7 +43,7 @@ def list_papers():
     papers = database.get_all_papers()
     for paper in papers:
         read = 'Yes' if paper['read'] else 'No'
-        print('{name}, {author}, {read}'.format(name=paper['name'],
+        print('{name}, {author}, read: {read}'.format(name=paper['name'],
                                                 author=paper['author'],
                                                 read=read))
 
