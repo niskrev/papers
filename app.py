@@ -44,8 +44,8 @@ def list_papers():
     for paper in papers:
         read = 'Yes' if paper['read'] else 'No'
         print('{name}, {author}, read: {read}'.format(name=paper['name'],
-                                                author=paper['author'],
-                                                read=read))
+                                                      author=paper['author'],
+                                                      read=read))
 
 
 def prompt_read_paper():
