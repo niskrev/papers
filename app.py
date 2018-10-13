@@ -4,7 +4,6 @@ main file for the papers app
 """
 from utils import database
 
-
 USER_CHOICE = """
 ENTER:
 - 'a' to add a new paper
