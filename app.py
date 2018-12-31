@@ -2,7 +2,7 @@
 main file for the papers app
     Created by Nikolay on 9/23/18
 """
-from utils import database
+from utils.database import Database
 
 USER_CHOICE = """
 ENTER:
@@ -14,9 +14,10 @@ ENTER:
 
 Your choice: """
 
+db = Database(db='data.db')
 
 def menu():
-    database.create_paper_table()
+    #db.create_paper_table()
     user_input = input(USER_CHOICE)
     while user_input != 'q':
         if user_input == 'a':
@@ -35,11 +36,11 @@ def menu():
 def prompt_add_paper():
     name = input('Enter the name of the paper: ')
     author = input('Enter the name of the author: ')
-    database.add_paper(name, author)
+    db.add_paper(name, author)
 
 
 def list_papers():
-    papers = database.get_all_papers()
+    papers = db.get_all_papers()
     for paper in papers:
         read = 'Yes' if paper['read'] else 'No'
         print('{name}, {author}, read: {read}'.format(name=paper['name'],
@@ -49,12 +50,12 @@ def list_papers():
 
 def prompt_read_paper():
     name = input('Enter the name of the paper you finished reading: ')
-    database.mark_paper_as_read(name)
+    db.mark_paper_as_read(name)
 
 
 def prompt_delete_paper():
     name = input('Enter the name of the paper you want to delete: ')
-    database.delete_paper(name)
+    db.delete_paper(name)
 
 
 if __name__ == '__main__':
